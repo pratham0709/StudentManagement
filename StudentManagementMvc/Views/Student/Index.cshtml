@@ -1,0 +1,89 @@
+﻿@model List<StudentManagementLibrary.Student>
+
+<h2>Student List</h2>
+
+<form asp-action="Add" method="post">
+    <div class="form-group">
+        <label for="FirstName">First Name</label>
+        <input type="text" name="FirstName" placeholder="First Name" required class="form-control" />
+        
+    </div>
+    <div class="form-group">
+        <label for="LastName">Last Name</label>
+        <input type="text" name="LastName" placeholder="Last Name" required class="form-control" />
+        
+    </div>
+    <div class="form-group">
+        <label for="Age">Age</label>
+        <input type="number" name="Age" placeholder="Age" required class="form-control" />
+        
+    </div>
+    <br />
+    <button type="submit" class="btn btn-primary">Add Student</button>
+</form>
+
+<br/>
+
+<h3>Search Students</h3>
+<form asp-action="Index" method="get">
+    <div class="form-group">
+        <label for="First Name">First Name</label>
+        <input type="text" name="firstName" placeholder="First Name" class="form-control" />
+
+        <label for="Last Name">Last Name</label>
+        <input type="text" name="lastName" placeholder="Last Name" class="form-control" />
+
+        <label for="Search Student">First Name</label>
+        <input type="number" name="age" placeholder="Age" class="form-control" />
+        <br/>
+        <button type="submit" class="btn btn-secondary">Search</button>
+    </div>
+</form>
+
+<br/>
+
+<h3>Delete Student</h3>
+<form asp-action="Delete" method="post">
+    <div class="form-group">
+        <label for="DeleteFirstName">First Name</label>
+        <input type="text" name="firstName" placeholder="First Name" required class="form-control" />
+    </div>
+    <div class="form-group">
+        <label for="DeleteLastName">Last Name</label>
+        <input type="text" name="lastName" placeholder="Last Name" required class="form-control" />
+    </div>
+    <br/>
+    <button type="submit" class="btn btn-danger">Delete Student</button>
+</form>
+
+<br/>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Age</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var student in Model)
+        {
+            <tr>
+                <td>@student.FirstName</td>
+                <td>@student.LastName</td>
+                <td>@student.Age</td>
+                <td>
+                    <form asp-action="Delete" method="post">
+                        <input type="hidden" name="firstName" value="@student.FirstName" />
+                        <input type="hidden" name="lastName" value="@student.LastName" />
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
